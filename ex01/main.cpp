@@ -1,32 +1,39 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-// class Bureaucrat {
-//     int grade;
-// public:
-//     Bureaucrat(int g) : grade(g) {
-//         if (g < 1)
-//             throw std::out_of_range("Grade must be between 1 and 150");
-//         if (g > 150)
-//             throw std::out_of_range("sfhkjjjjjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-//     }
-// };
+int main() {
+    std::cout << "Creating Bureaucrats:\n";
+    Bureaucrat john("John", 2);
+    Bureaucrat jane("Jane", 150);
 
-// int main() {
-//     try {
-//         Bureaucrat b1(100);  // This is fine
-//         Bureaucrat b2(200);  // This will throw an exception
-//     }
-//     catch (const std::exception& e) {
-//         std::cout << "Exception caught: " << e.what() << std::endl;
-//     }
-//     return 0;
-// }
+    std::cout << john << std::endl;
+    std::cout << jane << std::endl;
 
-int main()
-{
-    Bureaucrat B1("B1", 25);
-    std::cout << B1.getName() << std::endl;
-    std::cout << B1.getGrade() << std::endl;
+    std::cout << "Creating Forms:" << std::endl;
+    Form formA("FormA", 2, 10);
+    Form formB("FormB", 150, 150);
 
+    std::cout << formA << std::endl;
     
+    std::cout << "=====================\n" << std::endl;
+    john.signForm(formA); // success
+    std::cout << "\n-----------------------\n"<< std::endl;
+    jane.signForm(formB); // success
+    std::cout << "\n-----------------------\n" << std::endl;
+    jane.signForm(formA); // failed
+    std::cout << "\n=====================\n" << std::endl;
+
+    std::cout << "Form status after signing attempts:" << std::endl;
+    std::cout << formA << std::endl;
+    std::cout << formB << std::endl;
+
+    std::cout << "Testing increment and decrement on Bureaucrat grades:\n";
+
+    john.Increment();
+    jane.Decrement();
+
+    std::cout << john << std::endl;
+    std::cout << jane << std::endl;
+
+    return 0;
 }

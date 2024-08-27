@@ -1,17 +1,18 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 std::ostream &operator<<(std::ostream &out , Form const &Form)
 {
-    out << Form.getName() << "is it signed ? ==" << Form.getSigned() << "==" << std::endl;
+    out << Form.getName() << " Form is Signed == " << Form.getSigned() << std::endl;
     return out;
 }
 
-Form::Form(std::string name) : _Name(name) , _Signed(false) , Grade_sign(50), Grade_exec(15)
+Form::Form(std::string name, int gs, int ge) : _Name(name) , _Signed(false) , Grade_sign(gs), Grade_exec(ge)
 {
-    
+
 }
 
-Form::Form(Form const &other) : Grade_sign(50) , Grade_exec(10)
+Form::Form(Form const &other) : Grade_sign(other.Grade_sign) , Grade_exec(other.Grade_exec) 
 {
     *this = other;
 }
@@ -49,19 +50,14 @@ int Form::getGrade_exec() const
 
 void Form::beSigned(Bureaucrat &B)
 {
-    if (B.getGrade() >= Grade_sign)
+    if (B.getGrade() <= Grade_sign)
     {
-        std::cout << "The form has been signed" << std::endl;
         _Signed = true;
     }
-}
-
-void Form::signForm(Bureaucrat &B)
-{
-    if (_Signed == true)
-        std::cout << B << " signed " << getName() << std::endl;
     else
-        std::cout << B << " couldn't sign " << getName() << " because Grade is too LOW " << std::endl;
+    {
+        _Signed = false;
+    }
 }
 
 const char *Form::GradeTooHighException::what() const throw()

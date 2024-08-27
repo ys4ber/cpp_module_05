@@ -1,6 +1,10 @@
 #pragma once
 
-#include "Bureaucrat.hpp"
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+class Bureaucrat;
 
 class Form
 {
@@ -10,7 +14,7 @@ class Form
         const int Grade_sign;
         const int Grade_exec;
     public:
-        Form(std::string name);
+        Form(std::string name, int gs, int ge);
         Form(Form const &other);
         Form &operator=(Form const &other);
         ~Form();
@@ -20,7 +24,6 @@ class Form
         int getGrade_exec() const;
 
         void beSigned(Bureaucrat &B); 
-        void signForm(Bureaucrat &B);
 
         class GradeTooHighException : public std::exception
         {
