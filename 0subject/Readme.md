@@ -42,3 +42,11 @@ int main()
 }
 
 ```
+
+
+Basic Concept:
+
+    "Exceptions provide a way to transfer control from one part of a program 
+
+    to another when an error or unusual condition occurs."
+
