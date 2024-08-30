@@ -109,13 +109,17 @@ void Bureaucrat::executeForm(AForm const &form)
 {
     try
     {
-        if (form.getSigned() == true)
+        if (form.getSigned() == true && _Grade <= form.getGrade_exec())
         {
-            std::cout << this << " executed " << form.getName() << std::endl;
+            std::cout << getName() << " executed " << form.getName() << std::endl;
         }
         else if (form.getSigned() == false)
         {
             std::cout << getName() << " couldn't execute " << form.getName() << " because " ;
+            throw Bureaucrat::GradeTooLowException();
+        }
+        else
+        {
             throw Bureaucrat::GradeTooLowException();
         }
     }
@@ -123,7 +127,6 @@ void Bureaucrat::executeForm(AForm const &form)
     {
         std::cerr << e.what() << std::endl;
     }
-    
 }
 
 

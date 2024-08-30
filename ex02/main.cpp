@@ -1,18 +1,35 @@
 #include <iostream>
-#include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
 
-    std::cout << "this is test for ShrubberyCreationForm: \n" << std::endl; 
+        Bureaucrat alice("Alice", 1);  // High-ranking bureaucrat
+        Bureaucrat bob("Bob", 150);    // Low-ranking bureaucrat
+        
+        ShrubberyCreationForm shrubbery("Garden");
+        RobotomyRequestForm robotomy("Bender");
+        PresidentialPardonForm pardon("Ford Prefect");
 
-    ShrubberyCreationForm form("home");
-    Bureaucrat alice("Alice", 1);
-    form.beSigned(alice);    
-    Bureaucrat charlie("Charlie", 14);
-    form.execute(charlie);
-    std::cout << "\n\n------------------------\n" << std::endl;
+        // Alice (high-ranking) will sign and execute the forms
+        alice.signForm(shrubbery);
+        alice.signForm(robotomy);
+        alice.signForm(pardon);
 
+        std::cout << "\nExecuting forms with Alice:\n";
+        shrubbery.execute(alice);
+        robotomy.execute(alice);
+        pardon.execute(alice);
+
+        // Try to execute with Alice (success expected)
+    
+        // // Bob (low-ranking) will try to execute the forms (should throw exception)
+        std::cout << "\nExecuting forms with Bob:\n";
+        bob.executeForm(shrubbery);  // Should throw an exception
+        bob.executeForm(robotomy);   // Should throw an exception
+        bob.executeForm(pardon);     // Should throw an exception
     return 0;
 }
