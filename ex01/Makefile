@@ -31,5 +31,5 @@ A = 1;
 push:
 	git add .
 	git commit -m "update $(A)"
-	A=$$(($(A) + 1)); \
+	A=$$(($(A) + 1));
 	git push
