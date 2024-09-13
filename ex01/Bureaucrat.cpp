@@ -18,43 +18,28 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::Increment()
 {
-    try
+    if (_Grade <= 1)
     {
-        if (_Grade <= 1)
-        {
-            throw Bureaucrat::GradeTooHighException();
-        }
-        if (_Grade > 150)
-        {
-            throw Bureaucrat::GradeTooLowException();
-        }
-        _Grade--;
+        throw Bureaucrat::GradeTooHighException();
     }
-    catch(const std::exception& e)
+    if (_Grade > 150)
     {
-        std::cerr << e.what() << std::endl;
+        throw Bureaucrat::GradeTooLowException();
     }
-    
+    _Grade--;   
 }
 
 void Bureaucrat::Decrement()
 {
-    try
+    if (_Grade >= 150)
     {
-        if (_Grade >= 150)
-        {
-            throw Bureaucrat::GradeTooLowException();
-        }
-        if (_Grade < 1)
-        {
-            throw Bureaucrat::GradeTooHighException();
-        }
-        _Grade++;
+        throw Bureaucrat::GradeTooLowException();
     }
-    catch(const std::exception& e)
+    if (_Grade < 1)
     {
-        std::cerr << e.what() << std::endl;
+        throw Bureaucrat::GradeTooHighException();
     }
+    _Grade++;
 }
 
 Bureaucrat::Bureaucrat()
@@ -68,23 +53,16 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _Name(name)
 
 void Bureaucrat::signForm(Form &F)
 {
-    try
+    F.beSigned(*this);
+    if (F.getSigned() == true)
     {
-        F.beSigned(*this);
-        if (F.getSigned() == true)
-        {
-            std::cout << getName() << " signed " << F.getName() << std::endl;
-        }
-        else if (F.getSigned() == false)
-        {
-            std::cout << getName() << " couldn't sign " << F.getName() << " because ";
-            throw Bureaucrat::GradeTooLowException();
-        }
+        std::cout << getName() << " signed " << F.getName() << std::endl;
     }
-    catch(const std::exception& e)
+    else if (F.getSigned() == false)
     {
-        std::cerr << e.what() << std::endl;
-    }    
+        std::cout << getName() << " couldn't sign " << F.getName() << " because ";
+        throw Bureaucrat::GradeTooLowException();
+    }
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &other) : _Name(other._Name)
