@@ -6,9 +6,10 @@
 
 int main()
 {
-
-        Bureaucrat alice("Alice", 1);  // High-ranking bureaucrat
-        Bureaucrat bob("Bob", 150);    // Low-ranking bureaucrat
+    try
+    {   
+        Bureaucrat alice("Alice", 1);
+        Bureaucrat bob("Bob", 150);
         
         ShrubberyCreationForm shrubbery("Garden");
         RobotomyRequestForm robotomy("Bender");
@@ -31,5 +32,10 @@ int main()
         bob.executeForm(shrubbery);  // Should throw an exception
         bob.executeForm(robotomy);   // Should throw an exception
         bob.executeForm(pardon);     // Should throw an exception
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
     return 0;
 }
