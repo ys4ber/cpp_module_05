@@ -12,6 +12,10 @@ int main()
     alice.Increment();
     std::cout << alice << std::endl;
 
+    std::cout << "--------------------------\n\n" << std::endl;
+    bob.Increment();
+    std::cout << bob << std::endl;
+    std::cout << "\n--------------------------\n\n" << std::endl;
 
     bob.Decrement();
     std::cout << bob << std::endl;

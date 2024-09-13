@@ -20,11 +20,15 @@ void Bureaucrat::Increment()
 {
     try
     {
-        _Grade--;
-        if (_Grade < 1)
+        if (_Grade <= 1)
         {
             throw Bureaucrat::GradeTooHighException();
         }
+        if (_Grade > 150)
+        {
+            throw Bureaucrat::GradeTooHighException();
+        }
+        _Grade--;
     }
     catch(const std::exception& e)
     {
@@ -37,11 +41,15 @@ void Bureaucrat::Decrement()
 {
     try
     {
-        _Grade++;
-        if (_Grade > 150)
+        if (_Grade >= 150)
         {
             throw Bureaucrat::GradeTooLowException();
         }
+        if (_Grade < 1)
+        {
+            throw Bureaucrat::GradeTooLowException();
+        }
+       _Grade++;
     }
     catch(const std::exception& e)
     {
@@ -59,10 +67,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _Name(name)
     std::cout << "Bureaucrat constructor called" << std::endl;
     try
     {
-        if (grade > 0 && grade < 151)
-        {
-            _Grade = grade;
-        }
+        _Grade = grade;
         if (grade < 1)
         {
             throw Bureaucrat::GradeTooHighException();
@@ -74,8 +79,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _Name(name)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << e.what() << '\n';
     }
+    
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &other) : _Name(other._Name)

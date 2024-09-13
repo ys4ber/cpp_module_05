@@ -3,8 +3,21 @@
 
 std::ostream &operator<<(std::ostream &out , Form const &Form)
 {
-    out << Form.getName() << " Form is Signed == " << Form.getSigned() << std::endl;
+    out << "\"" <<Form.getName() << "\"  is Signed ? ==> ";
+    if (Form.getSigned())
+    {
+        out << "Yes";
+    }
+    else
+    {
+        out << "No";
+    }
     return out;
+}
+
+Form::Form() : _Name("Default"), _Signed(false), Grade_sign(150), Grade_exec(150)
+{
+
 }
 
 Form::Form(std::string name, int gs, int ge) : _Name(name) , _Signed(false) , Grade_sign(gs), Grade_exec(ge)
@@ -12,7 +25,7 @@ Form::Form(std::string name, int gs, int ge) : _Name(name) , _Signed(false) , Gr
 
 }
 
-Form::Form(Form const &other) : Grade_sign(other.Grade_sign) , Grade_exec(other.Grade_exec) 
+Form::Form(Form const &other) : _Name(other._Name), Grade_sign(other.Grade_sign) , Grade_exec(other.Grade_exec)
 {
     *this = other;
 }
@@ -62,10 +75,10 @@ void Form::beSigned(Bureaucrat &B)
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-    return "Grade is too HIGH";
+    return "Grade is too HIGH 2";
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-    return "Grade is too LOW`";
+    return "Grade is too LOW 2";
 }
