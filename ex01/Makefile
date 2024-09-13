@@ -25,3 +25,11 @@ fclean:
 	@echo "\033[0;31mFcleaned \033[0m"
 
 re: fclean all clean
+
+A = 1;
+
+push:
+	git add .
+	git commit -m "update $(A)"
+	A = $(shell echo $$(($(A) + 1)))
+	git push
