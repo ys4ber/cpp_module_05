@@ -11,7 +11,7 @@ int main() {
 
     std::cout << "***Creating Forms:\n" << std::endl;
     Form formA("FormA", 2, 10);
-    Form formB("FormB", 150, 150);
+    Form formB("FormB", 155, 150);
 
     std::cout << formA << std::endl;
     std::cout << formB << std::endl;
