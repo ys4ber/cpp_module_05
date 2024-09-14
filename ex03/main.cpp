@@ -40,11 +40,11 @@ int main()
             std::cerr << e.what() << std::endl;
         }
 
-        std::cout << "----- Testing Intern form creation -----" << std::endl;
+        std::cout << "\n----- Testing Intern form creation -----\n" << std::endl;
         Intern intern;
         AForm* newForm;
 
-        try {        
+        try {
             newForm = intern.makeForm("Shrubbery Creation", "garden");
             if (newForm)
             {
@@ -55,13 +55,12 @@ int main()
         }
         catch (std::exception &e)
         {
-            delete newForm;
             std::cerr << e.what() << std::endl;
         }
 
         try
         {
-            newForm = intern.makeForm("Robotomy Request", "robot");
+            newForm = intern.makeForm("Robotomy Rehquest", "robot");
             if (newForm)
             {
                 alice.signForm(*newForm);
@@ -71,13 +70,12 @@ int main()
         }
         catch(const std::exception& e)
         {
-            delete newForm;
             std::cerr << e.what() << '\n';
         }
         
         try
         {
-            newForm = intern.makeForm("Presidential Prdon", "target");
+            newForm = intern.makeForm("Presidentiahl Prdon", "target");
             if (newForm)
             {
                 john.signForm(*newForm);
@@ -98,6 +96,11 @@ int main()
         catch(const std::exception& e)
         {
             std::cerr << e.what() << '\n';
+        }
+
+        if (newForm)
+        {
+            delete newForm;
         }
 
     return 0;
