@@ -51,14 +51,23 @@ int AForm::getGrade_exec() const
 
 void AForm::beSigned(Bureaucrat &B)
 {
-    if (B.getGrade() <= Grade_sign)
+    try
     {
-        _Signed = true;
+        if (B.getGrade() <= Grade_sign)
+        {
+            _Signed = true;
+        }
+        else
+        {
+            _Signed = false;
+            throw Bureaucrat::GradeTooLowException();
+        }
     }
-    else
+    catch(const std::exception& e)
     {
-        _Signed = false;
+        std::cerr << e.what() << '\n';
     }
+    
 }
 
 const char *AForm::GradeTooHighException::what() const throw()

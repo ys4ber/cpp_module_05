@@ -14,4 +14,9 @@ class Intern
         Intern &operator=(Intern const &other);
         ~Intern();
         AForm *makeForm(const std::string &name,const std::string &target);
+        class InvalidFormException : public std::exception
+        {
+            public:
+                const char *what() const throw();
+        };
 }; 
