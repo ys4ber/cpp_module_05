@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -42,15 +41,17 @@ int main()
 
         std::cout << "\n----- Testing Intern form creation -----\n" << std::endl;
         Intern intern;
-        AForm* newForm;
+        AForm* Form1 = NULL;
+        AForm* Form2 = NULL;
+        AForm* Form3 = NULL;
+        AForm* Form4 = NULL;
 
         try {
-            newForm = intern.makeForm("Shrubbery Creation", "garden");
-            if (newForm)
+            Form1 = intern.makeForm("Shrubbery Creation", "garden");
+            if (Form1)
             {
-                john.signForm(*newForm);
-                john.executeForm(*newForm);
-                delete newForm;
+                john.signForm(*Form1);
+                john.executeForm(*Form1);
             }
         }
         catch (std::exception &e)
@@ -60,12 +61,11 @@ int main()
 
         try
         {
-            newForm = intern.makeForm("Robotomy Rehquest", "robot");
-            if (newForm)
+            Form2 = intern.makeForm("Robotomy Request", "robot");
+            if (Form2)
             {
-                alice.signForm(*newForm);
-                john.executeForm(*newForm);
-                delete newForm;
+                alice.signForm(*Form2);
+                john.executeForm(*Form2);
             }
         }
         catch(const std::exception& e)
@@ -75,12 +75,11 @@ int main()
         
         try
         {
-            newForm = intern.makeForm("Presidentiahl Prdon", "target");
-            if (newForm)
+            Form3 = intern.makeForm("Presidential Pardon", "target");
+            if (Form3)
             {
-                john.signForm(*newForm);
-                john.executeForm(*newForm);
-                delete newForm;
+                john.signForm(*Form3);
+                john.executeForm(*Form3);
             }
         }
         catch(const std::exception& e)
@@ -88,20 +87,25 @@ int main()
             std::cerr << e.what() << '\n';
         }
         
-        try {
+        try
+        {
             std::cout << "----- Testing unknown form -----" << std::endl;
-            newForm = intern.makeForm("unknown form", "test");
-            delete newForm;
+            Form4 = intern.makeForm("unknown form", "test");
+            if (Form4)
+            {
+                john.signForm(*Form4);
+                john.executeForm(*Form4);
+            }
         }
         catch(const std::exception& e)
         {
             std::cerr << e.what() << '\n';
         }
 
-        if (newForm)
-        {
-            delete newForm;
-        }
+        delete Form1;
+        delete Form2;
+        delete Form3;
+        delete Form4;
 
     return 0;
 }
