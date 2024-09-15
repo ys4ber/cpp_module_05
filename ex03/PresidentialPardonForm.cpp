@@ -24,24 +24,16 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
-    try
+    if (getSigned() == true && executor.getGrade() <= getGrade_exec())
     {
-        if (getSigned() == true && executor.getGrade() <= getGrade_exec())
-        {
-            std::cout << target << " has been pardoned by Zafod Beeblebrox" << std::endl;
-        }
-        else if (getSigned() == false && executor.getGrade() <= getGrade_exec())
-        {
-            std::cout << getName() << " is not signed yet" << std::endl;
-        }
-        else
-        {
-            throw GradeTooLowException();
-        }
+        std::cout << target << " has been pardoned by Zafod Beeblebrox" << std::endl;
     }
-    catch(const std::exception& e)
+    else if (getSigned() == false && executor.getGrade() <= getGrade_exec())
     {
-        std::cerr << e.what() << std::endl;
+        std::cout << getName() << " is not signed yet" << std::endl;
     }
-    
+    else
+    {
+        throw GradeTooLowException();
+    }
 }
